@@ -1,38 +1,115 @@
-.App {
+.login-form {
+  background: #fff;
+  width: 500px;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  flex-direction: column;
+  border-radius: 4px;
+  box-shadow: 0 2px 25px rgba(0, 0, 0, 0.2);
+}
+.login-form h1 {
+  padding: 35px 35px 0 35px;
+  font-weight: 300;
+  margin-bottom: 0;
+}
+.login-form .content {
+  padding: 20px 35px;
   text-align: center;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.login-form input {
+  font-size: 16px;
+  display: block;
+  font-family: "Rubik", sans-serif;
+  width: 100%;
+  padding: 10px 1px;
+  border: 0;
+  border-bottom: 1px solid #747474;
+  outline: none;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.login-form span.link {
+  text-decoration: none;
+  color: #747474;
+  letter-spacing: 0.2px;
+  text-transform: uppercase;
+  display: inline-block;
+  margin-top: 20px;
+  cursor: pointer;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.login-form span.link:hover {
+  color: #e35869;
+}
+.login-form .action {
+  display: -webkit-box;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  flex-direction: row;
+}
+.login-form .action button {
+  width: 100%;
+  border: none;
+  padding: 18px;
+  font-family: "Rubik", sans-serif;
+  cursor: pointer;
+  text-transform: uppercase;
+  background: #e8e9ec;
+  color: #777;
+  letter-spacing: 0.2px;
+  outline: 0;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+.login-form .action button:hover {
+  background: #d8d8d8;
+}
+.login-form .action button:nth-child(2) {
+  background: #2d3b55;
+  color: #fff;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 4px;
+}
+.login-form .action button:nth-child(2):hover {
+  background: #3c4d6d;
+}
+.login-form .submit-button {
+  margin-top: 20px;
+  border: none;
+  outline: none;
+  padding: 10px 30px;
+  font-family: "Rubik", sans-serif;
+  cursor: pointer;
+  text-transform: uppercase;
+  background: #e35869;
+  color: #fff;
+  letter-spacing: 0.2px;
+  border-radius: 4px;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
 }
 
-.App-link {
-  color: #61dafb;
+.login-form .submit-button:hover {
+  background: #d84a5b;
+  opacity: 0.8;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.ant-form-item-explain-error {
+  text-align: left;
+}
+.ant-form-item-control {
+  margin-top: 10px;
+}
+
+.login-success {
+  padding: 10px;
+}
+.login-success h1 {
+  margin-bottom: 20px;
+}
+
+.login-success p {
+  word-break: break-all;
 }
