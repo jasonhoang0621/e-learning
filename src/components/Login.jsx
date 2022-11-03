@@ -34,6 +34,10 @@ const Login = () => {
 
   return (
     <Spin spinning={isLoading}>
+      <div className="action">
+        <button onClick={() => navigate("/register")}>Register</button>
+        <button onClick={() => navigate("/")}>Sign in</button>
+      </div>
       <h1>Login</h1>
       <div className="content">
         <Form form={form} onFinish={handleSubmit}>
