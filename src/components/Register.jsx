@@ -1,16 +1,18 @@
-import { Form, notification } from "antd";
+import { Form, notification, Spin } from "antd";
 import { useForm } from "antd/es/form/Form";
 import React from "react";
-import auth from "../api/auth";
+import { useNavigate } from "react-router-dom";
+import { useRegister } from "../api/auth";
 
-const Register = ({ setIsLoading, setIsLogin }) => {
+const Register = () => {
   const [form] = useForm();
+  const { mutateAsync, isLoading } = useRegister();
+  const navigate = useNavigate();
 
   const handleSubmit = async () => {
     const formData = form.getFieldsValue();
     try {
-      setIsLoading(true);
-      const result = await auth.register(formData);
+      const result = await mutateAsync(formData);
       if (result?.errorCode || !result) {
         notification.error({
           description: result.data,
@@ -19,62 +21,65 @@ const Register = ({ setIsLoading, setIsLogin }) => {
         notification.success({
           description: "Register success",
         });
-        setIsLogin(true);
+        navigate("/");
       }
-      setIsLoading(false);
     } catch (error) {
       console.log(error);
-      setIsLoading(false);
     }
   };
 
   return (
-    <Form form={form} onFinish={handleSubmit}>
-      <Form.Item
-        name="email"
-        rules={[
-          {
-            required: true,
-            message: "Please input your email!",
-          },
-        ]}
-      >
-        <input type="email" placeholder="Email" autoComplete="nope" />
-      </Form.Item>
-      <Form.Item
-        name="password"
-        rules={[
-          {
-            required: true,
-            message: "Please input your password!",
-          },
-        ]}
-      >
-        <input
-          type="password"
-          placeholder="Password"
-          autoComplete="new-password"
-        />
-      </Form.Item>
-      <Form.Item
-        name="rePassword"
-        rules={[
-          {
-            required: true,
-            message: "Please input your password!",
-          },
-        ]}
-      >
-        <input
-          type="password"
-          placeholder="Re-enter password"
-          autoComplete="new-password"
-        />
-      </Form.Item>
-      <button type="submit" className="submit-button">
-        Register
-      </button>
-    </Form>
+    <Spin spinning={isLoading}>
+      <h1>Register</h1>
+      <div className="content">
+        <Form form={form} onFinish={handleSubmit}>
+          <Form.Item
+            name="email"
+            rules={[
+              {
+                required: true,
+                message: "Please input your email!",
+              },
+            ]}
+          >
+            <input type="email" placeholder="Email" autoComplete="nope" />
+          </Form.Item>
+          <Form.Item
+            name="password"
+            rules={[
+              {
+                required: true,
+                message: "Please input your password!",
+              },
+            ]}
+          >
+            <input
+              type="password"
+              placeholder="Password"
+              autoComplete="new-password"
+            />
+          </Form.Item>
+          <Form.Item
+            name="rePassword"
+            rules={[
+              {
+                required: true,
+                message: "Please input your password!",
+              },
+            ]}
+          >
+            <input
+              type="password"
+              placeholder="Re-enter password"
+              autoComplete="new-password"
+            />
+          </Form.Item>
+          <button type="submit" className="submit-button">
+            Register
+          </button>
+        </Form>
+      </div>
+    </Spin>
   );
 };
 

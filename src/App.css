@@ -106,8 +106,23 @@
 .login-success {
   padding: 10px;
 }
-.login-success h1 {
+.login-success-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   margin-bottom: 20px;
+  padding-top: 20px;
+  margin-right: 20px;
+}
+.login-success-header h3 {
+  margin-bottom: 0;
+}
+.login-success-header h3:hover {
+  cursor: pointer;
+  color: #e35869;
+}
+.login-success h1 {
+  padding-top: 0;
 }
 
 .login-success p {

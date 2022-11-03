@@ -1,13 +1,10 @@
+import { useMutation } from "@tanstack/react-query";
 import { axiosClient } from ".";
 
-class Auth {
-  async login(data) {
-    return axiosClient.post("/api/login", data);
-  }
+export const useLogin = () => {
+  return useMutation((payload) => axiosClient.post("/api/login", payload));
+};
 
-  async register(data) {
-    return await axiosClient.post("/api/register", data);
-  }
-}
-
-export default new Auth();
+export const useRegister = () => {
+  return useMutation((payload) => axiosClient.post("/api/register", payload));
+};
