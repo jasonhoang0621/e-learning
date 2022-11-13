@@ -23,6 +23,7 @@ const Login = () => {
         });
         localStorage.setItem("user", JSON.stringify(result.data));
         localStorage.setItem("token", result.data?.token);
+        localStorage.setItem("refreshToken", result.data?.refreshToken);
         navigate("/home");
       }
     } catch (error) {
@@ -38,7 +39,7 @@ const Login = () => {
         <button onClick={() => navigate("/register")}>Register</button>
         <button onClick={() => navigate("/")}>Sign in</button>
       </div>
-      <h1>Login</h1>
+      <h1 className="pl-[32px] pt-[20px]">Login</h1>
       <div className="content">
         <Form form={form} onFinish={handleSubmit}>
           <Form.Item

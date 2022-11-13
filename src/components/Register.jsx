@@ -34,7 +34,7 @@ const Register = () => {
         <button onClick={() => navigate("/register")}>Register</button>
         <button onClick={() => navigate("/")}>Sign in</button>
       </div>
-      <h1>Register</h1>
+      <h1 className="pl-[32px] pt-[20px]">Register</h1>
       <div className="content">
         <Form form={form} onFinish={handleSubmit}>
           <Form.Item

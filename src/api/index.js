@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosClient = axios.create({
-  baseURL: "https://login-core-server.herokuapp.com/",
+  baseURL: "https://login-core-server.herokuapp.com/api/",
   // baseURL: "http://localhost:4000/",
   headers: {
     "Content-Type": "application/json",
@@ -10,7 +10,7 @@ const axiosClient = axios.create({
 
 axiosClient.interceptors.request.use(async (config) => {
   const token = localStorage.getItem("token");
-  config.headers.token = `${token}` || "";
+  config.headers.Authorization = `${token}` || "";
   return config;
 });
 axiosClient.interceptors.response.use(
@@ -20,9 +20,29 @@ axiosClient.interceptors.response.use(
     }
     return response;
   },
-  (error) => {
+  async (error) => {
     if (error?.response?.status === 401) {
-      console.log(error);
+      localStorage.removeItem("token");
+      window.location.href = "/";
+    }
+    const originalRequest = error.config;
+    if (error?.response?.status === 403 && !originalRequest._retry) {
+      originalRequest._retry = true;
+      const result = await axiosClient.post("/refreshToken", {
+        refreshToken: localStorage.getItem("refreshToken"),
+        email: JSON.parse(localStorage.getItem("user"))?.email,
+      });
+      if (result?.errorCode) {
+        localStorage.removeItem("token");
+        localStorage.removeItem("refreshToken");
+        window.location.href = "/";
+        return;
+      }
+      localStorage.setItem("token", result?.data?.token);
+      localStorage.setItem("refreshToken", result?.data?.refreshToken);
+      axiosClient.defaults.headers.common["Authorization"] =
+        result?.data?.token;
+      return axiosClient(originalRequest);
     }
   }
 );
